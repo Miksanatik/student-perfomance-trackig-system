@@ -1,39 +1,40 @@
 import java.sql.*;
-import java.util.ArrayList;
-import by.gsu.asoilab.*;
-
 
 public class Main {
 
     public static void main(String[] args) {
-        String databaseURL = "jdbc:ucanaccess://course_database.accdb";
+        String className = "com.mysql.cj.jdbc.Driver";
 
+        String urlBase = "jdbc:mysql://127.0.0.1:3306/";
+        String dbName = "courses_db";
+        String additions = "?useUnicode=true&serverTimezone=UTC";
+        String dbUrl = urlBase + dbName + additions;
+
+        String username = "root";
+        String password = "password";
         try {
-            Connection connection = DriverManager.getConnection(databaseURL);
-
-            System.out.println("Connected to MS Access database!");
-
+            // Get a connection to DB
+            Class.forName(className);
+            Connection connection = DriverManager.getConnection(dbUrl, username, password);
+            // Create a statement
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM Students";
-            ResultSet result = statement.executeQuery(sql);
-            ArrayList<Student> students = new ArrayList<>();
-
-            while (result.next()) {
-                students.add(new Student(result.getInt(1),
-                        result.getString(2),
-                        result.getString(3),
-                        result.getInt(4)));
+            // Execute SQL query
+            String query = "SELECT * FROM Students";
+            ResultSet resultSet = statement.executeQuery(query);
+            // Process the result set
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("nickname") + " " +
+                        resultSet.getString("country") + " " +
+                        resultSet.getInt("age") + " " +
+                        resultSet.getString("gender")
+                );
             }
-
-            for (Student student : students) {
-                System.out.println(student);
-            }
-
             connection.close();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }
