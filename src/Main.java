@@ -1,40 +1,67 @@
+import by.gsu.asoilab.*;
+import by.gsu.asoilab.courses.Course;
+import by.gsu.asoilab.courses.CourseCategories;
+
 import java.sql.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        String className = "com.mysql.cj.jdbc.Driver";
-
-        String urlBase = "jdbc:mysql://127.0.0.1:3306/";
-        String dbName = "courses_db";
-        String additions = "?useUnicode=true&serverTimezone=UTC";
-        String dbUrl = urlBase + dbName + additions;
-
-        String username = "root";
-        String password = "password";
         try {
-            // Get a connection to DB
-            Class.forName(className);
-            Connection connection = DriverManager.getConnection(dbUrl, username, password);
-            // Create a statement
-            Statement statement = connection.createStatement();
-            // Execute SQL query
-            String query = "SELECT * FROM Students";
-            ResultSet resultSet = statement.executeQuery(query);
-            // Process the result set
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("nickname") + " " +
-                        resultSet.getString("country") + " " +
-                        resultSet.getInt("age") + " " +
-                        resultSet.getString("gender")
-                );
+            Connection connection = null;
+            Statement statement = null;
+            ResultSet resultSet = null;
+            try {
+                DatabaseConnection db = DatabaseConnection.getInstance();
+                connection = db.getConnection();
+                // Create a statement
+                statement = connection.createStatement();
+                // Execute SQL query
+                String query = "SELECT * FROM Students";
+                resultSet = statement.executeQuery(query);
+                // Process the result set
+                while (resultSet.next()) {
+                    System.out.println(resultSet.getString("nickname") + " " +
+                            resultSet.getString("country") + " " +
+                            resultSet.getInt("age") + " " +
+                            resultSet.getString("gender")
+                    );
+                }
+            } finally {
+                if (resultSet != null && !resultSet.isClosed()) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             }
-            connection.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+            System.out.println();
+            Course course = new CourseFactory.Builder()
+                    .setId(1)
+                    .setName("Python")
+                    .setCategory(CourseCategories.PROGRAMMING)
+                    .setThresholdPoints(225)
+                    .setPointsToHonors(290)
+                    .build();
+
+            System.out.println(course);
+
+            System.out.println();
+            Student student = new Student.Builder()
+                    .setNickname("Alina")
+                    .setAge(19)
+                    .setCountry("Belarus")
+                    .setGender(Gender.FEMALE)
+                    .setId(1)
+                    .build();
+            System.out.println(student);
+        } catch (SQLException e) {
+            e.getLocalizedMessage();
+        }
     }
 }
+

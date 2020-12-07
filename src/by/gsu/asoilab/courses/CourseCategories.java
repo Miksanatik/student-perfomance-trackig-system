@@ -1,4 +1,4 @@
-package by.gsu.asoilab;
+package by.gsu.asoilab.courses;
 
 public enum CourseCategories {
     PROGRAMMING,

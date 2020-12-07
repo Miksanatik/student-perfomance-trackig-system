@@ -1,23 +1,62 @@
 package by.gsu.asoilab;
 
+import by.gsu.asoilab.courses.*;
+
 public class CourseFactory {
-    public Course createCourse(CourseCategories category, int id, String name, int maxPoints, int threshold, int pointsToHonors) {
-        Course course = null;
-        switch(category) {
-            case PROGRAMMING:
-                course = new ProgrammingCourse(id, name, maxPoints, threshold, pointsToHonors);
-                break;
-            case MATH:
-                course = new MathCourse(id, name, maxPoints, threshold, pointsToHonors);
-                break;
-            case BIOLOGY:
-                course = new BiologyCourse(id, name, maxPoints, threshold, pointsToHonors);
-                break;
-            case PHYSICS:
-                course = new PhysicsCourse(id, name, maxPoints, threshold, pointsToHonors);
-                break;
+    public static class Builder {
+        private int id;
+        private String name;
+        private int thresholdPoints;
+        private int pointsToHonors;
+        private CourseCategories category;
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
         }
 
-        return course;
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setThresholdPoints(int thresholdPoints) {
+            this.thresholdPoints = thresholdPoints;
+            return this;
+        }
+
+        public Builder setPointsToHonors(int pointsToHonors) {
+            this.pointsToHonors = pointsToHonors;
+            return this;
+        }
+
+        public Builder setCategory(CourseCategories category) {
+            this.category = category;
+            return this;
+        }
+
+        public Course build() {
+            Course course = null;
+            switch(category) {
+                case PROGRAMMING:
+                    course = new ProgrammingCourse(id, name, thresholdPoints, pointsToHonors);
+                    break;
+                case MATH:
+                    course = new MathCourse(id, name, thresholdPoints, pointsToHonors);
+                    break;
+                case BIOLOGY:
+                    course = new BiologyCourse(id, name, thresholdPoints, pointsToHonors);
+                    break;
+                case PHYSICS:
+                    course = new PhysicsCourse(id, name, thresholdPoints, pointsToHonors);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Wrong course category: " + category);
+            }
+
+            return course;
+        }
+
     }
+
 }

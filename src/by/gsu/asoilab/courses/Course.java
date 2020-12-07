@@ -1,18 +1,15 @@
-package by.gsu.asoilab;
+package by.gsu.asoilab.courses;
 
 public abstract class Course {
     private final int id;
     private final String name;
-    private final int maxPoints;
-    private final int threshold;
+    private final int thresholdPoints;
     private final int pointsToHonors;
 
-
-    public Course(int id, String name, int maxPoints, int threshold, int pointsToHonors) {
+    public Course(int id, String name, int thresholdPoints, int pointsToHonors) {
         this.id = id;
         this.name = name;
-        this.maxPoints = maxPoints;
-        this.threshold = threshold;
+        this.thresholdPoints = thresholdPoints;
         this.pointsToHonors = pointsToHonors;
     }
 
@@ -24,12 +21,8 @@ public abstract class Course {
         return name;
     }
 
-    public int getMaxPoints() {
-        return maxPoints;
-    }
-
-    public int getThreshold() {
-        return threshold;
+    public int getThresholdPoints() {
+        return thresholdPoints;
     }
 
     public int getPointsToHonors() {
@@ -37,11 +30,11 @@ public abstract class Course {
     }
 
     public int getPointsToPassWithHonors() {
-        return pointsToHonors - threshold;
+        return pointsToHonors - thresholdPoints;
     }
 
     @Override
     public String toString() {
-        return String.format("%d;%s;%d;%d;%d", id, name, maxPoints, threshold, pointsToHonors);
+        return String.format("%d;%s;%d;%d", id, name, thresholdPoints, pointsToHonors);
     }
 }

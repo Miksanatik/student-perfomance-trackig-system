@@ -4,57 +4,68 @@ public class Student {
     private int id;
     private String nickname;
     private String country;
+    private Gender gender;
     private int age;
-    private String gender;
 
-    public Student() {
-    }
+    public static class Builder {
+        private Student student;
 
-    public Student(int id, String nickname, String country, int age, String gender) {
-        this.id = id;
-        this.nickname = nickname;
-        this.country = country;
-        this.age = age;
-        this.gender = gender;
+        public Builder() {
+            student = new Student();
+        }
+
+        public Builder setId(int id) {
+            student.id = id;
+            return this;
+        }
+
+        public Builder setNickname(String nickname) {
+            student.nickname = nickname;
+            return this;
+        }
+
+        public Builder setCountry(String country) {
+            student.country = country;
+            return this;
+        }
+
+        public Builder setGender(Gender gender) {
+            student.gender = gender;
+            return this;
+        }
+
+        public Builder setAge(int age) {
+            student.age = age;
+            return this;
+        }
+
+        public Student build() {
+            return student;
+        }
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNickname() {
         return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public Gender getGender() {
+        return gender;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    @Override
+    public String toString() {
+        return String.format("%d;%s;%s;%s;%d", id, nickname, country, gender, age);
     }
 }
