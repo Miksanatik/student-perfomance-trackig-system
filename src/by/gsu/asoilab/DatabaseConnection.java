@@ -10,7 +10,7 @@ public class DatabaseConnection {
     private String className = "com.mysql.cj.jdbc.Driver";
     private String dbUrl = "jdbc:mysql://127.0.0.1:3306/courses_db?serverTimezone=Europe/Minsk";
     private String username = "root";
-    private String password = "alina12";
+    private String password = "1234567890";
 
     private DatabaseConnection() throws SQLException {
         try {
