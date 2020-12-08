@@ -26,8 +26,8 @@ class StudentTest {
 
     @Test
     void getGender() {
-        Student student = new Student.Builder().setGender(Gender.MALE).build();
-        assertEquals(Gender.MALE, student.getGender());
+        Student student = new Student.Builder().setGender(Gender.M).build();
+        assertEquals(Gender.M, student.getGender());
     }
 
     @Test
@@ -42,7 +42,7 @@ class StudentTest {
                 .setId(1)
                 .setNickname("Paul")
                 .setCountry("USA")
-                .setGender(Gender.MALE)
+                .setGender(Gender.M)
                 .setAge(20)
                 .build();
         assertEquals("1;Paul;USA;Male;20", student.toString());

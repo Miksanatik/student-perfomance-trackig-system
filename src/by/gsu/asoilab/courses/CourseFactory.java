@@ -1,4 +1,4 @@
-package by.gsu.asoilab;
+package by.gsu.asoilab.courses;
 
 import by.gsu.asoilab.courses.*;
 
@@ -36,22 +36,27 @@ public class CourseFactory {
         }
 
         public Course build() {
-            Course course = null;
-            switch(category) {
-                case PROGRAMMING:
+            Course course;
+            switch (category) {
+                case PROGRAMMING: {
                     course = new ProgrammingCourse(id, name, thresholdPoints, pointsToHonors);
                     break;
-                case MATH:
+                }
+                case MATH: {
                     course = new MathCourse(id, name, thresholdPoints, pointsToHonors);
                     break;
-                case BIOLOGY:
+                }
+                case BIOLOGY: {
                     course = new BiologyCourse(id, name, thresholdPoints, pointsToHonors);
                     break;
-                case PHYSICS:
+                }
+                case PHYSICS: {
                     course = new PhysicsCourse(id, name, thresholdPoints, pointsToHonors);
                     break;
-                default:
+                }
+                default: {
                     throw new IllegalArgumentException("Wrong course category: " + category);
+                }
             }
 
             return course;

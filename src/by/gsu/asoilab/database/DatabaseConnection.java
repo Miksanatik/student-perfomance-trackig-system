@@ -1,4 +1,4 @@
-package by.gsu.asoilab;
+package by.gsu.asoilab.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ public class DatabaseConnection {
     private Connection connection;
     private String className = "com.mysql.cj.jdbc.Driver";
     private String dbUrl = "jdbc:mysql://127.0.0.1:3306/courses_db?serverTimezone=Europe/Minsk";
-    private String username = "root";
+    private String username = "Alina";
     private String password = "alina12";
 
     private DatabaseConnection() throws SQLException {
