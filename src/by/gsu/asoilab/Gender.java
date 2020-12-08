@@ -1,8 +1,8 @@
 package by.gsu.asoilab;
 
 public enum Gender {
-    MALE ("Male"),
-    FEMALE ("Female");
+    M ("Male"),
+    F ("Female");
 
     private String gender;
 
