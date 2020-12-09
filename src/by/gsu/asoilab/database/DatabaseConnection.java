@@ -9,13 +9,8 @@ public class DatabaseConnection {
     private Connection connection;
     private String className = "com.mysql.cj.jdbc.Driver";
     private String dbUrl = "jdbc:mysql://127.0.0.1:3306/courses_db?serverTimezone=Europe/Minsk";
-<<<<<<< HEAD:src/by/gsu/asoilab/DatabaseConnection.java
     private String username = "root";
     private String password = "1234567890";
-=======
-    private String username = "Alina";
-    private String password = "alina12";
->>>>>>> 647398086a359f0a54cb38528a57bd1b0c10cbcc:src/by/gsu/asoilab/database/DatabaseConnection.java
 
     private DatabaseConnection() throws SQLException {
         try {

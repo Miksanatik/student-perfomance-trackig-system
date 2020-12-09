@@ -1,5 +1,5 @@
 package by.gsu.asoilab.graphics;
 
 public interface GraphicStrategy {
-    public void create();
+    public void create(int[] data);
 }
