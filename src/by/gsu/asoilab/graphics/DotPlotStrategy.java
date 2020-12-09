@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
-public class PointGraphicStrategy implements GraphicStrategy {
+public class DotPlotStrategy implements GraphicStrategy {
     @Override
     public void create(int[] data) {
         JFrame frm = new JFrame();

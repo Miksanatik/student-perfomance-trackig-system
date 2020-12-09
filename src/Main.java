@@ -2,10 +2,8 @@ import by.gsu.asoilab.*;
 import by.gsu.asoilab.courses.Course;
 import by.gsu.asoilab.database.DatabaseInteraction;
 import by.gsu.asoilab.graphics.Graphic;
-import by.gsu.asoilab.graphics.Histogram;
-import by.gsu.asoilab.graphics.PointGraphic;
+import by.gsu.asoilab.graphics.DotPlot;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -37,7 +35,7 @@ public class Main {
             System.out.println(progress);
         }
 
-        Graphic graphic = new PointGraphic();
+        Graphic graphic = new DotPlot();
         graphic.create(progresses.get(0).getControlPoints());
 
     }
