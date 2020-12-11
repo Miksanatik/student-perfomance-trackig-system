@@ -1,6 +1,8 @@
 package by.gsu.asoilab.courses;
 
-import by.gsu.asoilab.courses.*;
+import by.gsu.asoilab.Achievement;
+
+import java.util.List;
 
 public class CourseFactory {
     public static class Builder {
@@ -9,6 +11,7 @@ public class CourseFactory {
         private int thresholdPoints;
         private int pointsToHonors;
         private CourseCategories category;
+        private List<Achievement> achievements;
 
         public Builder setId(int id) {
             this.id = id;
@@ -35,31 +38,13 @@ public class CourseFactory {
             return this;
         }
 
-        public Course build() {
-            Course course;
-            switch (category) {
-                case PROGRAMMING: {
-                    course = new ProgrammingCourse(id, name, thresholdPoints, pointsToHonors);
-                    break;
-                }
-                case MATH: {
-                    course = new MathCourse(id, name, thresholdPoints, pointsToHonors);
-                    break;
-                }
-                case BIOLOGY: {
-                    course = new BiologyCourse(id, name, thresholdPoints, pointsToHonors);
-                    break;
-                }
-                case PHYSICS: {
-                    course = new PhysicsCourse(id, name, thresholdPoints, pointsToHonors);
-                    break;
-                }
-                default: {
-                    throw new IllegalArgumentException("Wrong course category: " + category);
-                }
-            }
+        public Builder setAchievements(List<Achievement> achievements) {
+            this.achievements = achievements;
+            return this;
+        }
 
-            return course;
+        public Course build() {
+            return category.createCourse(id, name, thresholdPoints, pointsToHonors, achievements);
         }
 
     }

@@ -19,9 +19,15 @@ class AchievementTest {
     }
 
     @Test
-    void getPoints() {
-        Achievement achievement = new Achievement.Builder().setPoints(100).build();
-        assertEquals(100, achievement.getPoints());
+    void getRequiredPoints() {
+        Achievement achievement = new Achievement.Builder().setRequiredPoints(100).build();
+        assertEquals(100, achievement.getRequiredPoints());
+    }
+
+    @Test
+    void getEarnedPoints() {
+        Achievement achievement = new Achievement.Builder().setEarnedPoints(50).build();
+        assertEquals(50, achievement.getEarnedPoints());
     }
 
     @Test
@@ -31,20 +37,14 @@ class AchievementTest {
     }
 
     @Test
-    void getCourseId() {
-        Achievement achievement = new Achievement.Builder().setCourseId(2).build();
-        assertEquals(2, achievement.getCourseId());
-    }
-
-    @Test
     void testToString() {
         Achievement achievement = new Achievement.Builder()
                 .setId(5)
                 .setName("JavaExpert")
-                .setPoints(100)
+                .setRequiredPoints(100)
                 .setTestNo(1)
-                .setCourseId(2)
+                .setEarnedPoints(50)
                 .build();
-        assertEquals("5;JavaExpert;100;1;2", achievement.toString());
+        assertEquals("5;JavaExpert;100;1;50", achievement.toString());
     }
 }

@@ -1,6 +1,9 @@
 package by.gsu.asoilab.database;
 
-import by.gsu.asoilab.*;
+import by.gsu.asoilab.Achievement;
+import by.gsu.asoilab.Gender;
+import by.gsu.asoilab.Progress;
+import by.gsu.asoilab.Student;
 import by.gsu.asoilab.courses.Course;
 import by.gsu.asoilab.courses.CourseCategories;
 import by.gsu.asoilab.courses.CourseFactory;
@@ -10,7 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseInteraction {
     private static Connection cn;
@@ -49,9 +54,9 @@ public class DatabaseInteraction {
                 achievements.add(new Achievement.Builder()
                         .setId(rs.getInt(1))
                         .setName(rs.getString(2))
-                        .setPoints(rs.getInt(3))
+                        .setRequiredPoints(rs.getInt(3))
                         .setTestNo(rs.getInt(4))
-                        .setCourseId(rs.getInt(5))
+                        .setEarnedPoints(rs.getInt(5))
                         .build());
             }
         } catch (SQLException e) {
@@ -61,7 +66,7 @@ public class DatabaseInteraction {
         return achievements;
     }
 
-    public List<Course> readCoursesFromDb() {
+    public List<Course> readCoursesFromDb(List<Achievement> achievements) {
         List<Course> courses = new ArrayList<>();
         try (Statement st = cn.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM courses"))  {
             while (rs.next()) {
@@ -71,6 +76,7 @@ public class DatabaseInteraction {
                         .setName(rs.getString(2))
                         .setThresholdPoints(rs.getInt(3))
                         .setPointsToHonors(rs.getInt(4))
+                        .setAchievements(achievements)
                         .build());
             }
         } catch (SQLException e) {
@@ -80,13 +86,15 @@ public class DatabaseInteraction {
         return courses;
     }
 
-    public List<Progress> readProgressFromDb() {
+    public List<Progress> readProgressFromDb(List<Course> courses, List<Student> students) {
+        Map<Integer, Course> courseById = getCourseById(courses);
+        Map<Integer, Student> studentById = getStudentById(students);
         List<Progress> progresses = new ArrayList<>();
         try (Statement st = cn.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM progress")) {
             while (rs.next()) {
                 progresses.add(new Progress.Builder()
-                        .setStudentId(rs.getInt(1))
-                        .setCourseId(rs.getInt(2))
+                        .setStudent(studentById.get(rs.getInt(1)))
+                        .setCourse(courseById.get(rs.getInt(2)))
                         .setControlPoints(new int[]{rs.getInt(3),
                                 rs.getInt(4),
                                 rs.getInt(5),
@@ -99,6 +107,22 @@ public class DatabaseInteraction {
         }
 
         return progresses;
+    }
+
+    private Map<Integer, Course> getCourseById(List<Course> courses) {
+        Map<Integer, Course> courseById = new HashMap<>();
+        for (Course course : courses) {
+            courseById.put(course.getId(), course);
+        }
+        return courseById;
+    }
+
+    private Map<Integer, Student> getStudentById(List<Student> students) {
+        Map<Integer, Student> studentById = new HashMap<>();
+        for (Student student : students) {
+            studentById.put(student.getId(), student);
+        }
+        return studentById;
     }
 
 }

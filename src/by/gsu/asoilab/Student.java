@@ -1,5 +1,7 @@
 package by.gsu.asoilab;
 
+import java.util.Objects;
+
 public class Student {
     private int id;
     private String nickname;
@@ -62,6 +64,23 @@ public class Student {
 
     public int getAge() {
         return age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return id == student.id &&
+                age == student.age &&
+                Objects.equals(nickname, student.nickname) &&
+                Objects.equals(country, student.country) &&
+                gender == student.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nickname, country, gender, age);
     }
 
     @Override

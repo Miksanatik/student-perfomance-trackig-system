@@ -1,8 +1,6 @@
 import by.gsu.asoilab.*;
-import by.gsu.asoilab.courses.Course;
+import by.gsu.asoilab.courses.*;
 import by.gsu.asoilab.database.DatabaseInteraction;
-import by.gsu.asoilab.graphics.Graphic;
-import by.gsu.asoilab.graphics.DotPlot;
 
 import java.util.List;
 
@@ -17,26 +15,32 @@ public class Main {
             System.out.println(student);
         }
 
-        System.out.println("\nCourses:");
-        List<Course> courses = db.readCoursesFromDb();
-        for (Course course : courses) {
-            System.out.println(course);
-        }
-
         System.out.println("\nAchievements:");
         List<Achievement> achievements = db.readAchievementsFromDb();
         for (Achievement achievement : achievements) {
             System.out.println(achievement);
         }
 
+        System.out.println("\nCourses:");
+        List<Course> courses = db.readCoursesFromDb(achievements);
+        for (Course course : courses) {
+            System.out.println(course);
+        }
+
         System.out.println("\nProgresses:");
-        List<Progress> progresses = db.readProgressFromDb();
+        List<Progress> progresses = db.readProgressFromDb(courses, students);
         for (Progress progress : progresses) {
             System.out.println(progress);
         }
 
-        Graphic graphic = new DotPlot();
-        graphic.create(progresses.get(0).getControlPoints());
+        Progress progress = progresses.get(0);
+        System.out.println("\n"+progress);
+        System.out.println("\nAverage: " + progress.getAveragePoint());
+        System.out.println("Max: " + progress.getMaxPoint());
+        System.out.println("Min: " + progress.getMinPoint());
+        System.out.println("Total: " + progress.getTotalPoints());
+        System.out.println("\nAchievements:");
+        progress.printEarnedAchievements();
 
     }
 }

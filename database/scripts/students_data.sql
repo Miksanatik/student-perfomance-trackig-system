@@ -1,0 +1,22 @@
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("John", "UK", 20, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Jane", "US", 22, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Max", "Belarus", 20, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Dasha", "Ukraine", 24, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Peter", "Russia", 32, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Nastya", "Russia", 27, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Stephan", "Germany", 27, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Beatrice", "Germany", 30, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Noah", "Canada", 18, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Lily", "UK", 21, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Oscar", "Canada", 18, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Nancy", "US", 27, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Sharon", "UK", 22, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Richard", "Canada", 21, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Ivan", "Belarus", 20, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Natasha", "Russia", 22, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Denis", "Ukraine", 27, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Kate", "Belarus", 20, 'M');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Helen", "US", 30, 'F');
+INSERT INTO courses_db.students (nickname, country, age, gender) VALUES ("Brian", "Canada", 35, 'M');
+
+SELECT * FROM courses_db.students;

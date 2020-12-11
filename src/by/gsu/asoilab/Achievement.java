@@ -3,12 +3,12 @@ package by.gsu.asoilab;
 public class Achievement {
     private int id;
     private String name;
-    private int points;
+    private int requiredPoints;
     private int testNo;
-    private int courseId;
+    private int earnedPoints;
 
     public static class Builder {
-        private Achievement achievement;
+        private final Achievement achievement;
 
         public Builder() {
             achievement = new Achievement();
@@ -24,8 +24,8 @@ public class Achievement {
             return this;
         }
 
-        public Builder setPoints(int points) {
-            achievement.points = points;
+        public Builder setRequiredPoints(int requiredPoints) {
+            achievement.requiredPoints = requiredPoints;
             return this;
         }
 
@@ -34,14 +34,15 @@ public class Achievement {
             return this;
         }
 
-        public Builder setCourseId(int courseId) {
-            achievement.courseId = courseId;
+        public Builder setEarnedPoints(int earnedPoints) {
+            achievement.earnedPoints = earnedPoints;
             return this;
         }
 
         public Achievement build() {
             return achievement;
         }
+
     }
 
     public int getId() {
@@ -52,20 +53,20 @@ public class Achievement {
         return name;
     }
 
-    public int getPoints() {
-        return points;
+    public int getRequiredPoints() {
+        return requiredPoints;
     }
 
     public int getTestNo() {
         return testNo;
     }
 
-    public int getCourseId() {
-        return courseId;
+    public int getEarnedPoints() {
+        return earnedPoints;
     }
 
     @Override
     public String toString() {
-        return String.format("%d;%s;%d;%d;%d", id, name, points, testNo, courseId);
+        return String.format("%d;%s;%d;%d;%d", id, name, requiredPoints, testNo, earnedPoints);
     }
 }
