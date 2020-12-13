@@ -9,7 +9,7 @@ public class PhysicsCourse extends Course {
         super(id, name, thresholdPoints, pointsToHonors, achievements);
     }
 
-    public int getTotalPointsFormula(int summaryPoints, int achievedPoints) {
+    public int calculateTotalPoints(int summaryPoints, int achievedPoints) {
         double result = 0.85 * summaryPoints + achievedPoints;
         return (int)Math.round(result);
     }

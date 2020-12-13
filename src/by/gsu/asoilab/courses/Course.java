@@ -40,7 +40,7 @@ public abstract class Course {
         return achievements;
     }
 
-    public abstract int getTotalPointsFormula(int summaryPoints, int achievedPoints);
+    public abstract int calculateTotalPoints(int summaryPoints, int achievedPoints);
 
     @Override
     public boolean equals(Object o) {
@@ -50,12 +50,13 @@ public abstract class Course {
         return id == course.id &&
                 thresholdPoints == course.thresholdPoints &&
                 pointsToHonors == course.pointsToHonors &&
-                Objects.equals(name, course.name);
+                Objects.equals(name, course.name) &&
+                Objects.equals(achievements, course.achievements);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, thresholdPoints, pointsToHonors);
+        return Objects.hash(id, name, thresholdPoints, pointsToHonors, achievements);
     }
 
     @Override

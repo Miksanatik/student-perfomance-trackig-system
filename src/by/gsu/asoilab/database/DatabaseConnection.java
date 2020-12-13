@@ -7,17 +7,17 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static DatabaseConnection instance;
     private Connection connection;
-    private String className = "com.mysql.cj.jdbc.Driver";
-    private String dbUrl = "jdbc:mysql://127.0.0.1:3306/courses_db?serverTimezone=Europe/Minsk";
-    private String username = "root";
-    private String password = "1234567890";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/courses_db?serverTimezone=Europe/Minsk";
+    private static final String USERNAME = "name";
+    private static final String PASSWORD = "password";
 
     private DatabaseConnection() throws SQLException {
         try {
-            Class.forName(className);
-            this.connection = DriverManager.getConnection(dbUrl, username, password);
+            Class.forName(DRIVER);
+            this.connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException e) {
-            System.out.println("Problems with the database connection creation: " + e.getMessage());
+            throw new SQLException("JDBC driver not found!");
         }
     }
 
@@ -32,4 +32,5 @@ public class DatabaseConnection {
 
         return instance;
     }
+
 }

@@ -9,7 +9,7 @@ public class BiologyCourse extends Course {
         super(id, name, thresholdPoints, pointsToHonors, achievements);
     }
 
-    public int getTotalPointsFormula(int summaryPoints, int achievedPoints) {
+    public int calculateTotalPoints(int summaryPoints, int achievedPoints) {
         double result = summaryPoints + 0.75 * achievedPoints;
         return (int)Math.round(result);
     }

@@ -119,7 +119,7 @@ public class Progress {
     }
 
     public int getTotalPoints() {
-        return course.getTotalPointsFormula(getSummaryPoints(), getAchievedPoints());
+        return course.calculateTotalPoints(getSummaryPoints(), getAchievedPoints());
     }
 
     public boolean isPassed() {

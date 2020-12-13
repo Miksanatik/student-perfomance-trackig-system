@@ -9,7 +9,7 @@ public class ProgrammingCourse extends Course {
         super(id, name, thresholdPoints, pointsToHonors, achievements);
     }
 
-    public int getTotalPointsFormula(int summaryPoints, int achievedPoints) {
+    public int calculateTotalPoints(int summaryPoints, int achievedPoints) {
         double result = summaryPoints + achievedPoints;
         return (int)Math.round(result);
     }

@@ -101,7 +101,7 @@ class ProgressTest {
     }
 
     @Test
-    void testGetIsPassed() {
+    void testIsPassed() {
         int[] controlPoints = {100, 20, 30, 50, 70};
         List<Achievement> achievements = Arrays.asList(
                 new Achievement.Builder()
@@ -128,7 +128,7 @@ class ProgressTest {
     }
 
     @Test
-    void testGetIsPassedWithHonors() {
+    void testIsPassedWithHonors() {
         int[] controlPoints = {100, 20, 30, 50, 70};
         List<Achievement> achievements = Arrays.asList(
                 new Achievement.Builder()

@@ -104,17 +104,17 @@ class CourseTest {
     }
 
     @Test
-    void testGetTotalPointsFormula() {
+    void testCalculateTotalPoints() {
         int summaryPoints = 300;
         int achievedPoints = 20;
         assertEquals(summaryPoints + achievedPoints,
-                programmingCourse.getTotalPointsFormula(summaryPoints, achievedPoints));
+                programmingCourse.calculateTotalPoints(summaryPoints, achievedPoints));
         assertEquals(0.9 * summaryPoints + 0.8 * achievedPoints,
-                mathCourse.getTotalPointsFormula(summaryPoints, achievedPoints));
+                mathCourse.calculateTotalPoints(summaryPoints, achievedPoints));
         assertEquals(summaryPoints + 0.75 * achievedPoints,
-                biologyCourse.getTotalPointsFormula(summaryPoints, achievedPoints));
+                biologyCourse.calculateTotalPoints(summaryPoints, achievedPoints));
         assertEquals(0.85 * summaryPoints + achievedPoints,
-                physicsCourse.getTotalPointsFormula(summaryPoints, achievedPoints));
+                physicsCourse.calculateTotalPoints(summaryPoints, achievedPoints));
     }
 
     @Test
