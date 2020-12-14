@@ -7,10 +7,10 @@ import java.util.Arrays;
 
 public class DotPlotStrategy implements GraphicStrategy {
     @Override
-    public void create(int[] data) {
+    public void create(int[] data, String name) {
         JFrame frm = new JFrame();
         frm.setSize(new Dimension(500, 300));
-        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frm.setVisible(true);
 
         JPanel p = new JPanel() {
@@ -38,7 +38,7 @@ public class DotPlotStrategy implements GraphicStrategy {
                 }
             }
         };
-        frm.setTitle("Point graphic");
+        frm.setTitle(name);
         frm.getContentPane().add(p);
     }
 }
