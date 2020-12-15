@@ -36,16 +36,16 @@ public class PieChartStrategy implements GraphicStrategy {
 
 
                 g2.setColor(Color.GREEN);
-                g2.fillRect(X-100,(Y-50)/2-20,10,10);
+                g2.fillRect(X-150,(Y-50)/2-20,10,10);
                 g2.setColor(Color.ORANGE);
-                g2.fillRect(X-100,(Y-50)/2,10,10);
+                g2.fillRect(X-150,(Y-50)/2,10,10);
                 g2.setColor(Color.BLUE);
-                g2.fillRect(X-100,(Y-50)/2+20,10,10);
+                g2.fillRect(X-150,(Y-50)/2+20,10,10);
 
                 g2.setColor(Color.BLACK);
-                g2.drawString("Раки", X-100+20,(Y-50)/2-10);
-                g2.drawString("Днищи", X-100+20,(Y-50)/2+10);
-                g2.drawString("Овощи", X-100+20,(Y-50)/2+30);
+                g2.drawString("Passed with honors", X-150+20,(Y-50)/2-10);
+                g2.drawString("Passed", X-150+20,(Y-50)/2+10);
+                g2.drawString("Not passed", X-150+20,(Y-50)/2+30);
             }
         };
         frm.getContentPane().add(p);

@@ -16,7 +16,6 @@ public class HistogramStrategy implements GraphicStrategy {
 
     @Override
     public void create(int[] data, String name) {
-
         JFrame frm = new JFrame();
         frm.setSize(new Dimension(X, Y));
         //frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,16 +38,16 @@ public class HistogramStrategy implements GraphicStrategy {
                 g2.drawString("Avg",X*2/3+30,Y-55);
 
                 g2.setColor(Color.PINK);
-                g2.fillRect(X/3-30, (Y-75)-data[0]*(Y-75)/100,20,data[0]*(Y-75)/100 );
+                g2.fillRect(X/3-30, (Y-75)-data[0]*(Y-100)/100,20,data[0]*(Y-100)/100 );
                 g2.fillRect(X/3, (Y-75)-data[1]*(Y-75)/100,20,data[1]*(Y-75)/100 );
                 g2.fillRect(X/3+30, (Y-75)-data[2]*(Y-75)/100,20,data[2]*(Y-75)/100 );
                 g2.fillRect(X-75,(Y-50)/2,10,10);
 
 
                 g2.setColor(Color.CYAN);
-                g2.fillRect(X*2/3-30, (Y-75)-data[3]*(Y-75)/100,20,data[3]*(Y-75)/100 );
-                g2.fillRect(X*2/3, (Y-75)-data[4]*(Y-75)/100,20,data[4]*(Y-75)/100 );
-                g2.fillRect(X*2/3+30, (Y-75)-data[5]*(Y-75)/100,20,data[5]*(Y-75)/100 );
+                g2.fillRect(X*2/3-30, (Y-75)-data[3]*(Y-100)/100,20,data[3]*(Y-100)/100 );
+                g2.fillRect(X*2/3, (Y-75)-data[4]*(Y-100)/100,20,data[4]*(Y-100)/100 );
+                g2.fillRect(X*2/3+30, (Y-75)-data[5]*(Y-100)/100,20,data[5]*(Y-100)/100 );
                 g2.fillRect(X-75,(Y-50)/2+20,10,10);
 
                 g2.setColor(Color.BLACK);
