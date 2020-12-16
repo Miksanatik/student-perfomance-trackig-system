@@ -29,8 +29,9 @@ public class Main {
                         "2: Output histogram by gender\n" +
                         "3: Output pie chart\n" +
                         "4: Output dot plot by student\n" +
-                        "5: Information about student\n" +
-                        "6: Exit");
+                        "5: Print information about student and courses\n" +
+                        "6: Print information about earned achievements\n" +
+                        "7: Exit");
                 System.out.print("Enter a number: ");
                 num = in.nextInt();
                 switch (num) {
@@ -52,6 +53,9 @@ public class Main {
                         showInfo(progresses, in);
                         break;
                     case 6:
+                        showAchievements(progresses, in);
+                        break;
+                    case 7:
                         System.exit(0);
                     default:
                         System.out.println("Incorrect number");
@@ -148,7 +152,7 @@ public class Main {
 
 
     static void showInfo(List<Progress> progresses, Scanner in) {
-        System.out.print("Enter id: ");
+        System.out.print("Enter ID of student: ");
         int id = in.nextInt();
         for (Progress progress : progresses) {
             if (progress.getStudent().getId() == id) {
@@ -162,6 +166,18 @@ public class Main {
                 else
                     System.out.println("; Didn't passed");
 
+            }
+        }
+    }
+
+    static void showAchievements(List<Progress> progresses, Scanner in) {
+        System.out.print("Enter ID of student: ");
+        int id = in.nextInt();
+        for (Progress progress : progresses) {
+            if (progress.getStudent().getId() == id) {
+                System.out.println();
+                System.out.println("Course name: " + progress.getCourse().getName());
+                progress.printEarnedAchievements();
             }
         }
     }
