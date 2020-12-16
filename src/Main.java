@@ -5,9 +5,11 @@ import by.gsu.asoilab.database.DatabaseInteraction;
 import by.gsu.asoilab.graphics.*;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,47 +24,51 @@ public class Main {
             List<Course> courses = db.readCoursesFromDb(achievements);
             List<Progress> progresses = db.readProgressFromDb(courses, students);
 
-            Scanner in = new Scanner(System.in);
-            int num = 0;
-            while (true) {
-                System.out.println("1: Output list of student \n" +
-                        "2: Output histogram by gender\n" +
-                        "3: Output pie chart\n" +
-                        "4: Output dot plot by student\n" +
-                        "5: Print information about student and courses\n" +
-                        "6: Print information about earned achievements\n" +
-                        "7: Exit");
-                System.out.print("Enter a number: ");
-                num = in.nextInt();
-                switch (num) {
-                    case 1:
-                        for (Student student : students) {
-                            System.out.println(student);
-                        }
-                        break;
-                    case 2:
-                        showHistogram(progresses);
-                        break;
-                    case 3:
-                        showPieChart(progresses);
-                        break;
-                    case 4:
-                        showDotPlot(progresses, students.size(), in);
-                        break;
-                    case 5:
-                        showInfo(progresses, in);
-                        break;
-                    case 6:
-                        showAchievements(progresses, in);
-                        break;
-                    case 7:
-                        System.exit(0);
-                    default:
-                        System.out.println("Incorrect number");
-                        break;
+            try (Scanner in = new Scanner(System.in)) {
+                int num = 0;
+                while (true) {
+                    System.out.println("1: Output list of student \n" +
+                            "2: Output histogram by gender\n" +
+                            "3: Output pie chart\n" +
+                            "4: Output dot plot by student\n" +
+                            "5: Print information about student and courses\n" +
+                            "6: Print information about earned achievements\n" +
+                            "7: Exit");
+                    System.out.print("Enter a number: ");
+                    num = in.nextInt();
+                    switch (num) {
+                        case 1:
+                            for (Student student : students) {
+                                System.out.println(student);
+                            }
+                            break;
+                        case 2:
+                            showHistogram(progresses);
+                            break;
+                        case 3:
+                            showPieChart(progresses);
+                            break;
+                        case 4:
+                            showDotPlot(progresses, students.size(), in);
+                            break;
+                        case 5:
+                            showInfo(progresses, in);
+                            break;
+                        case 6:
+                            showAchievements(progresses, in);
+                            break;
+                        case 7:
+                            System.exit(0);
+                        default:
+                            System.out.println("Incorrect number");
+                            break;
+                    }
+                    System.out.println();
                 }
-                System.out.println();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
 //            Graphic graphic = new DotPlot();
 //            graphic.create(progresses.get(0).getControlPoints(),
 //                    "Results graph: "+
@@ -77,7 +83,8 @@ public class Main {
 //            graphic2.create(mass2,"Pie");
 
         } catch (SQLException e) {
-            System.out.println(e.getLocalizedMessage());
+            e.printStackTrace();
+//          System.out.println(e.getLocalizedMessage());
         }
     }
 

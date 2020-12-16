@@ -9,8 +9,8 @@ public class DatabaseConnection {
     private Connection connection;
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/courses_db?serverTimezone=Europe/Minsk";
-    private static final String USERNAME = "Alina";
-    private static final String PASSWORD = "alina12";
+    private static final String USERNAME = "me";
+    private static final String PASSWORD = "1234567890";
 
     private DatabaseConnection() throws SQLException {
         try {
