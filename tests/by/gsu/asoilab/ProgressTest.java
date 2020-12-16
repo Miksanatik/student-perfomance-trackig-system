@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProgressTest {
 
     @Test
-    void getStudentId() {
+    void getStudent() {
         Progress progress = new Progress.Builder()
                 .setStudent(new Student.Builder().build())
                 .build();
@@ -24,9 +24,9 @@ class ProgressTest {
     @Test
     void getCourse() {
         Progress progress = new Progress.Builder()
-                .setCourse(new CourseFactory.Builder().setCategory(CourseCategories.MATH).build())
+                .setCourse(new CourseFactory.Builder(CourseCategories.MATH).build())
                 .build();
-        Course course = new CourseFactory.Builder().setCategory(CourseCategories.MATH).build();
+        Course course = new CourseFactory.Builder(CourseCategories.MATH).build();
         assertEquals(course, progress.getCourse());
     }
 
@@ -42,7 +42,7 @@ class ProgressTest {
         int[] controlPoints = {100, 158, 205, 79, 147};
         Progress progress = new Progress.Builder()
                 .setStudent(new Student.Builder().setId(1).build())
-                .setCourse(new CourseFactory.Builder().setId(3).setCategory(CourseCategories.BIOLOGY).build())
+                .setCourse(new CourseFactory.Builder(CourseCategories.BIOLOGY).setId(3).build())
                 .setControlPoints(controlPoints)
                 .build();
         assertEquals("1;3;[100, 158, 205, 79, 147]", progress.toString());
@@ -65,8 +65,7 @@ class ProgressTest {
         );
         Progress progress = new Progress.Builder()
                 .setControlPoints(controlPoints)
-                .setCourse(new CourseFactory.Builder()
-                        .setCategory(CourseCategories.PROGRAMMING)
+                .setCourse(new CourseFactory.Builder(CourseCategories.PROGRAMMING)
                         .setAchievements(achievements)
                         .build())
                 .build();
@@ -117,8 +116,7 @@ class ProgressTest {
         );
         Progress progress = new Progress.Builder()
                 .setControlPoints(controlPoints)
-                .setCourse(new CourseFactory.Builder()
-                        .setCategory(CourseCategories.PROGRAMMING)
+                .setCourse(new CourseFactory.Builder(CourseCategories.PROGRAMMING)
                         .setAchievements(achievements)
                         .setThresholdPoints(400)
                         .setPointsToHonors(420)
@@ -144,8 +142,7 @@ class ProgressTest {
         );
         Progress progress = new Progress.Builder()
                 .setControlPoints(controlPoints)
-                .setCourse(new CourseFactory.Builder()
-                        .setCategory(CourseCategories.PROGRAMMING)
+                .setCourse(new CourseFactory.Builder(CourseCategories.PROGRAMMING)
                         .setAchievements(achievements)
                         .setThresholdPoints(400)
                         .setPointsToHonors(420)

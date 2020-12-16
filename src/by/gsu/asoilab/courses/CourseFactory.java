@@ -13,6 +13,10 @@ public class CourseFactory {
         private CourseCategories category;
         private List<Achievement> achievements;
 
+        public Builder(CourseCategories category) {
+            this.category = category;
+        }
+
         public Builder setId(int id) {
             this.id = id;
             return this;
@@ -30,11 +34,6 @@ public class CourseFactory {
 
         public Builder setPointsToHonors(int pointsToHonors) {
             this.pointsToHonors = pointsToHonors;
-            return this;
-        }
-
-        public Builder setCategory(CourseCategories category) {
-            this.category = category;
             return this;
         }
 

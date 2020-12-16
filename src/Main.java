@@ -15,29 +15,12 @@ public class Main {
 
     public static void main(String[] args) {
         try (Connection cn = DatabaseConnection.getInstance().getConnection()) {
-            System.out.println("Students:");
-            List<Student> students = DatabaseInteraction.readStudentsFromDd(cn);
-//            for (Student student : students) {
-//                System.out.println(student);
-//            }
-//
-//            System.out.println("\nAchievements:");
-            List<Achievement> achievements = DatabaseInteraction.readAchievementsFromDb(cn);
-//            for (Achievement achievement : achievements) {
-//                System.out.println(achievement);
-//            }
-//
-//            System.out.println("\nCourses:");
-            List<Course> courses = DatabaseInteraction.readCoursesFromDb(cn, achievements);
-//            for (Course course : courses) {
-//                System.out.println(course);
-//            }
-//
-//            System.out.println("\nProgresses:");
-            List<Progress> progresses = DatabaseInteraction.readProgressFromDb(cn, courses, students);
-//            for (Progress progress : progresses) {
-//                System.out.println(progress);
-//            }
+            DatabaseInteraction db = new DatabaseInteraction(cn);
+
+            List<Student> students = db.readStudentsFromDd();
+            List<Achievement> achievements = db.readAchievementsFromDb();
+            List<Course> courses = db.readCoursesFromDb(achievements);
+            List<Progress> progresses = db.readProgressFromDb(courses, students);
 
             Scanner in = new Scanner(System.in);
             int num = 0;
@@ -48,6 +31,7 @@ public class Main {
                         "4: Output dot plot by student\n" +
                         "5: Information about student\n" +
                         "6: Exit");
+                System.out.print("Enter a number: ");
                 num = in.nextInt();
                 switch (num) {
                     case 1:
@@ -88,14 +72,6 @@ public class Main {
 //            Graphic graphic2 = new PieChart();
 //            graphic2.create(mass2,"Pie");
 
-//                    Progress progress = progresses.get(0);
-//                    System.out.println("\n" + progress);
-//                    System.out.println("\nAverage: " + progress.getAveragePoint());
-//                    System.out.println("Max: " + progress.getMaxPoint());
-//                    System.out.println("Min: " + progress.getMinPoint());
-//                    System.out.println("Total: " + progress.getTotalPoints());
-//                    System.out.println("\nAchievements:");
-//                    progress.printEarnedAchievements();
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
         }
@@ -109,21 +85,21 @@ public class Main {
         int avgM = 0;
         int countF = 0;
         int countM = 0;
-        for (Progress prgs : progresses) {
-            if (prgs.getStudent().getGender().equals(Gender.M)) {
-                if (results[0] < prgs.getMaxPoint())
-                    results[0] = prgs.getMaxPoint();
-                if (results[1] > prgs.getMinPoint())
-                    results[1] = prgs.getMinPoint();
-                avgM += prgs.getAveragePoint();
+        for (Progress progress : progresses) {
+            if (progress.getStudent().getGender().equals(Gender.M)) {
+                if (results[0] < progress.getMaxPoint())
+                    results[0] = progress.getMaxPoint();
+                if (results[1] > progress.getMinPoint())
+                    results[1] = progress.getMinPoint();
+                avgM += progress.getAveragePoint();
                 ++countM;
             }
-            if (prgs.getStudent().getGender().equals(Gender.F)) {
-                if (results[3] < prgs.getMaxPoint())
-                    results[3] = prgs.getMaxPoint();
-                if (results[4] > prgs.getMinPoint())
-                    results[4] = prgs.getMinPoint();
-                avgF += prgs.getAveragePoint();
+            if (progress.getStudent().getGender().equals(Gender.F)) {
+                if (results[3] < progress.getMaxPoint())
+                    results[3] = progress.getMaxPoint();
+                if (results[4] > progress.getMinPoint())
+                    results[4] = progress.getMinPoint();
+                avgF += progress.getAveragePoint();
                 ++countF;
             }
 
@@ -138,10 +114,10 @@ public class Main {
 
     public static void showPieChart(List<Progress> progresses) {
         int[] results = new int[3];
-        for (Progress prgs : progresses) {
-            if (prgs.isPassedWithHonors()) {
+        for (Progress progress : progresses) {
+            if (progress.isPassedWithHonors()) {
                 ++results[0];
-            } else if (prgs.isPassed()) {
+            } else if (progress.isPassed()) {
                 ++results[1];
             } else
                 ++results[2];
@@ -152,13 +128,13 @@ public class Main {
     }
 
     public static void showDotPlot(List<Progress> progresses, int size, Scanner in) {
-        System.out.println("Enter ID of student");
+        System.out.print("Enter ID of student: ");
         int id = in.nextInt();
         if (id < size) {
-            for(Progress prgs : progresses) {
-                if(prgs.getStudent().getId() == id) {
+            for (Progress progress : progresses) {
+                if (progress.getStudent().getId() == id) {
                     Graphic dotPlot = new DotPlot();
-                    dotPlot.create(prgs.getControlPoints(), prgs.getStudent().getNickname() + ": " + prgs.getCourse().getName());
+                    dotPlot.create(progress.getControlPoints(), progress.getStudent().getNickname() + ": " + progress.getCourse().getName());
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -174,14 +150,14 @@ public class Main {
     static void showInfo(List<Progress> progresses, Scanner in) {
         System.out.print("Enter id: ");
         int id = in.nextInt();
-        for(Progress prgs : progresses) {
-            if(prgs.getStudent().getId() == id) {
-                System.out.print(prgs.getStudent().getNickname() + "; " +
-                        prgs.getCourse().getName() + "; Points: " +
-                        prgs.getTotalPoints());
-                if(prgs.isPassedWithHonors())
+        for (Progress progress : progresses) {
+            if (progress.getStudent().getId() == id) {
+                System.out.print(progress.getStudent().getNickname() + "; " +
+                        progress.getCourse().getName() + "; Points: " +
+                        progress.getTotalPoints());
+                if (progress.isPassedWithHonors())
                     System.out.println("; Passed with honors");
-                else if (prgs.isPassed())
+                else if (progress.isPassed())
                     System.out.println("; Passed");
                 else
                     System.out.println("; Didn't passed");

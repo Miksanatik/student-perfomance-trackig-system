@@ -27,40 +27,36 @@ class CourseTest {
                     .build()
     );
 
-    Course programmingCourse = new CourseFactory.Builder()
+    Course programmingCourse = new CourseFactory.Builder(CourseCategories.PROGRAMMING)
             .setId(1)
             .setName("Python")
             .setThresholdPoints(250)
             .setPointsToHonors(275)
             .setAchievements(achievements)
-            .setCategory(CourseCategories.PROGRAMMING)
             .build();
 
-    Course mathCourse = new CourseFactory.Builder()
+    Course mathCourse = new CourseFactory.Builder(CourseCategories.MATH)
             .setId(2)
             .setName("Probability")
             .setThresholdPoints(325)
             .setPointsToHonors(335)
             .setAchievements(achievements)
-            .setCategory(CourseCategories.MATH)
             .build();
 
-    Course biologyCourse = new CourseFactory.Builder()
+    Course biologyCourse = new CourseFactory.Builder(CourseCategories.BIOLOGY)
             .setId(3)
             .setName("Anatomy")
             .setThresholdPoints(480)
             .setPointsToHonors(495)
             .setAchievements(achievements)
-            .setCategory(CourseCategories.BIOLOGY)
             .build();
 
-    Course physicsCourse = new CourseFactory.Builder()
+    Course physicsCourse = new CourseFactory.Builder(CourseCategories.PHYSICS)
             .setId(4)
             .setName("Mechanics")
             .setThresholdPoints(420)
             .setPointsToHonors(435)
             .setAchievements(achievements)
-            .setCategory(CourseCategories.PHYSICS)
             .build();
 
     @Test
